@@ -65,6 +65,8 @@
             document.getElementById("submitButton").disabled = true;
             document.getElementById("loadingSpinner").classList.remove("hidden");
         }
+
+        // Mensagens de sucesso e erro desaparecendo automaticamente
         const message = document.getElementById('message');
         if (message) {
             setTimeout(() => {
