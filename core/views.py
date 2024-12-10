@@ -51,7 +51,7 @@ class CriarMetaView(SuccessMessageMixin, CreateView):
                 Não deixe para última hora, estamos aqui para ajudar você a alcançar sua meta!
 
                 Abraços,
-                Equipe SMART
+                José Estêvão, Pedro Sawczuk e Reginaldo Júnior.
             """
             send_mail(reminder_subject, reminder_message, 'smartadsif@gmail.com', [usuario_email])
             
@@ -65,9 +65,6 @@ class CriarMetaView(SuccessMessageMixin, CreateView):
             O usuário com o e-mail {usuario_email} criou a meta '{nome_meta}'.
 
             A data de conclusão da meta é {tempo_meta.strftime('%d/%m/%Y')}.
-
-            Abraços,
-            Equipe SMART
         """
         send_mail(subject_admin, message_admin, 'smartadsif@gmail.com', ['smartadsif@gmail.com'])
 
