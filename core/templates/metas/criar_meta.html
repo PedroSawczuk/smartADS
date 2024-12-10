@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Meta SMART</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    {% if messages %}
+        <div id="message" class="fixed top-0 left-0 right-0 mx-auto max-w-4xl p-4 bg-green-100 text-green-800 text-center shadow-lg rounded-b-xl mb-6 z-50">
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-lg">
+        <h1 class="text-3xl font-semibold text-center mb-6 text-gray-800">Defina sua Meta SMART</h1>
+        <form id="metaForm" method="POST" onsubmit="showLoading()">
+            {% csrf_token %}
+            <div class="mb-6">
+                <label for="id_nome" class="block text-sm font-medium text-gray-700">Nome da Meta</label>
+                <input type="text" name="nome" id="id_nome" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="Digite o nome da meta">
+            </div>
+            <div class="mb-6">
+                <label for="id_especifica" class="block text-sm font-medium text-gray-700">Específica</label>
+                <textarea name="especifica" id="id_especifica" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="Descreva de forma específica sua meta"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="id_mensuravel" class="block text-sm font-medium text-gray-700">Mensurável</label>
+                <textarea name="mensuravel" id="id_mensuravel" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="Como medir o progresso da meta?"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="id_atingivel" class="block text-sm font-medium text-gray-700">Atingível</label>
+                <textarea name="atingivel" id="id_atingivel" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="A meta é realista e possível de ser atingida?"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="id_relevante" class="block text-sm font-medium text-gray-700">Relevante</label>
+                <textarea name="relevante" id="id_relevante" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="A meta é importante para você?"></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="id_tempo" class="block text-sm font-medium text-gray-700">Data Final</label>
+                <input type="date" name="tempo" id="id_tempo" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300">
+            </div>
+            <div class="mb-6">
+                <label for="id_email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" name="email" id="id_email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-300 ease-in-out hover:ring-blue-300" placeholder="Seu e-mail">
+            </div>
+
+            <div class="mt-8 relative">
+                <button id="submitButton" type="submit" class="w-full py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Salvar Meta</button>
+                <div id="loadingSpinner" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 rounded-lg hidden">
+                    <div class="w-12 h-12 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById("submitButton").disabled = true;
+            document.getElementById("loadingSpinner").classList.remove("hidden");
+        }
+        const message = document.getElementById('message');
+        if (message) {
+            setTimeout(() => {
+                message.classList.add('opacity-0');
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 500);
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
